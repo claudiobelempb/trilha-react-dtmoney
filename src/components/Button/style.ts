@@ -18,8 +18,8 @@ export const ButtonContainer = styled.button<IButtonProps>`
   position: relative;
   // width: ${props => props.width ? props.width : '1rem'};
   padding: 0 1rem;
-  height:40px;
-  border-radius: 5px;
+  height: 3rem;
+  border-radius: 0.25rem;
   background-color: ${props => props.bgColor ? props.bgColor : props.theme.colors.blue_light};
   /* margin-top: 20px; */
   color: ${props => props.color ? props.color : props.theme.colors.white};

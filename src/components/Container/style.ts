@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface IMainProps {
+interface IContainerProps {
   garea?:string;
   fdirection?: string;
   jcontent?: string;
@@ -29,43 +29,56 @@ interface IMainProps {
   width?: number;
 }
 
-export const MainContainer = styled.div<IMainProps>`
-  grid-area: ${props => props.garea ? props.garea : ""};
+export const MainContainer = styled.div<IContainerProps>`
+  grid-area: ${(props) => (props.garea ? props.garea : "")};
   display: flex;
-  justify-content: ${props => props.jcontent ? props.jcontent : "center"};
-  flex-direction: ${props => props.fdirection ? props.fdirection : "column"};
-  align-items: ${props => props.aitems ? props.aitems : "center"};
-  ${props => props.isbg && css<IMainProps>`
-    background-color: ${props => props.bgcolor ? props.bgcolor : props.theme.colors.blue};
-  `};
-  color: ${props => props.theme.colors.dark};
-  width: ${props => props.height ? props.height : 100}%;
+  justify-content: ${(props) => (props.jcontent ? props.jcontent : "center")};
+  flex-direction: ${(props) =>
+    props.fdirection ? props.fdirection : "column"};
+  align-items: ${(props) => (props.aitems ? props.aitems : "center")};
+  ${(props) =>
+    props.isbg &&
+    css<IContainerProps>`
+      background-color: ${(props) =>
+        props.bgcolor ? props.bgcolor : props.theme.colors.blue};
+    `};
+  color: ${(props) => props.theme.colors.dark};
+  width: ${(props) => (props.height ? props.height : 100)}%;
   min-width: 100%;
-  ${props => props.isHeight && css<IMainProps>`
-    height: ${props => props.height ? props.height : 0}vh;
-  `};
-  padding: ${props => props.padding ? props.ptb : props.ptb = 0}rem ${props => props.prl}rem;
+  ${(props) =>
+    props.isHeight &&
+    css<IContainerProps>`
+      height: ${(props) => (props.height ? props.height : 0)}vh;
+    `};
+  padding: ${(props) => (props.padding ? props.ptb : (props.ptb = 0))}rem
+    ${(props) => props.prl}rem;
 
-  margin: ${props => props.margin ? props.margin : 0}rem;
-  ${props => props.isPadding && css<IMainProps>`
-    margin-top: ${props => props.pt ? props.pt : 0}rem;
-    margin-bottom: ${props => props.pb ? props.pb : 0}rem;
-    margin-right: ${props => props.pr ? props.pr : 0}rem;
-    margin-left: ${props => props.pl ? props.pl : 0}rem;
-  `};
-  
-  ${props => props.isPosition && css<IMainProps>`
-    position: absolute;
-    top: -70px;
-  `};
+  margin: ${(props) => (props.margin ? props.margin : 0)}rem;
+  ${(props) =>
+    props.isPadding &&
+    css<IContainerProps>`
+      margin-top: ${(props) => (props.pt ? props.pt : 0)}rem;
+      margin-bottom: ${(props) => (props.pb ? props.pb : 0)}rem;
+      margin-right: ${(props) => (props.pr ? props.pr : 0)}rem;
+      margin-left: ${(props) => (props.pl ? props.pl : 0)}rem;
+    `};
 
-  padding: ${props => props.padding ? props.padding : 0}rem;
-  ${props => props.isPadding && css<IMainProps>`
-    padding-top: ${props => props.pt ? props.pt : 0}rem;
-    padding-bottom: ${props => props.pb ? props.pb : 0}rem;
-    padding-right: ${props => props.pr ? props.pr : 0}rem;
-    padding-left: ${props => props.pl ? props.pl : 0}rem;
-  `};
+  ${(props) =>
+    props.isPosition &&
+    css<IContainerProps>`
+      position: absolute;
+      top: -70px;
+    `};
+
+  padding: ${(props) => (props.padding ? props.padding : 0)}rem;
+  ${(props) =>
+    props.isPadding &&
+    css<IContainerProps>`
+      padding-top: ${(props) => (props.pt ? props.pt : 0)}rem;
+      padding-bottom: ${(props) => (props.pb ? props.pb : 0)}rem;
+      padding-right: ${(props) => (props.pr ? props.pr : 0)}rem;
+      padding-left: ${(props) => (props.pl ? props.pl : 0)}rem;
+    `};
 `;
 
 

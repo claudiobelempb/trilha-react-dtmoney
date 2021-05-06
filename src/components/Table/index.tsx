@@ -18,62 +18,62 @@ export const Table: React.FC<ITableProps> = ({
   return (
     <>
       <TableContainer tagcolor={tagcolor}>
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Preço</th>
-          <th>Categoria</th>
-          <th>Data</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Desenvolvimento de site</td>
-          <td>R$ 12.000,00</td>
-          <td>Venda</td>
-          <td>13/04/2021</td>
-          <td>
-            <a href={"/"}>Create</a>
-            <a href={"/"}>Update</a>
-            <a href={"/"}>Delete</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Hambúrguer</td>
-          <td>- R$ 59,00</td>
-          <td>Alimentação</td>
-          <td>10/04/2021</td>
-          <td>
-            <a href={"/"}>Create</a>
-            <a href={"/"}>Update</a>
-            <a href={"/"}>Delete</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Aluguel do apartamento</td>
-          <td>- R$ 1.200,00</td>
-          <td>Casa</td>
-          <td>27/03/2021</td>
-          <td>
-            <a href={"/"}>Create</a>
-            <a href={"/"}>Update</a>
-            <a href={"/"}>Delete</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Computador</td>
-          <td>R$ 5.400,00</td>
-          <td>Venda</td>
-          <td>15/03/2021</td>
-          <td>
-            <a href={"/"}>Create</a>
-            <a href={"/"}>Update</a>
-            <a href={"/"}>Delete</a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Data</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Desenvolvimento de site</td>
+            <td className={"deposit"}>R$ 12.000,00</td>
+            <td>Venda</td>
+            <td>13/04/2021</td>
+            <td>
+              <a href={"/"}>Create</a>
+              <a href={"/"}>Update</a>
+              <a href={"/"}>Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Hambúrguer</td>
+            <td className={"withdraw"}>- R$ 59,00</td>
+            <td>Alimentação</td>
+            <td>10/04/2021</td>
+            <td>
+              <a href={"/"}>Create</a>
+              <a href={"/"}>Update</a>
+              <a href={"/"}>Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Aluguel do apartamento</td>
+            <td className={"withdraw"}>- R$ 1.200,00</td>
+            <td>Casa</td>
+            <td>27/03/2021</td>
+            <td>
+              <a href={"/"}>Create</a>
+              <a href={"/"}>Update</a>
+              <a href={"/"}>Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Computador</td>
+            <td className={"deposit"}>R$ 5.400,00</td>
+            <td>Venda</td>
+            <td>15/03/2021</td>
+            <td>
+              <a href={"/"}>Create</a>
+              <a href={"/"}>Update</a>
+              <a href={"/"}>Delete</a>
+            </td>
+          </tr>
+        </tbody>
+        {/* <tfoot>
         <tr>
           <td>Título</td>
           <td>Preço</td>
@@ -81,8 +81,8 @@ export const Table: React.FC<ITableProps> = ({
           <td>Data</td>
           <td>Ações</td>
         </tr>
-      </tfoot>
-    </TableContainer>
+      </tfoot> */}
+      </TableContainer>
     </>
   );
 }

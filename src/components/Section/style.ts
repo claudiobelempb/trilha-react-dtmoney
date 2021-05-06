@@ -23,6 +23,7 @@ interface IContainerSection {
 }
 
 export const ContainerSection = styled.section<IContainerSection>`
+  position: relative;
   grid-area: ${props => props.garea ? props.garea : ""};
   display: flex;
   background-color: ${props => props.bgcolor ? props.bgcolor : "transparent"};
@@ -40,7 +41,7 @@ export const ContainerSection = styled.section<IContainerSection>`
   
   ${props => props.isPosition && css<IContainerSection>`
     position: absolute;
-    top: -70px;
+    top: -80px;
   `};
 
   ${props => props.isPadding && css<IContainerSection>`

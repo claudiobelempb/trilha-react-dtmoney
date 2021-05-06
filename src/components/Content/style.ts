@@ -29,7 +29,7 @@ export const ContentContainer = styled.div<IContentProps>`
   background-color: ${props => props.bgcolor ? props.bgcolor : "transparent"};
   border-right: ${props => props.isbr ? "1px solid #FFFFFF" : "1px solid none"};
   border-bottom: ${props => props.isbb ? "1px solid #FFFFFF" : "1px solid none"};
-  width: ${props => props.width ? props.width : 90}%;
+  width: ${props => props.width ? props.width : 83}%;
   height: ${props => props.height ? props.height : ""};
   overflow-y: ${props => props.isofy ? "scroll" : ""};
   margin: 0 auto;

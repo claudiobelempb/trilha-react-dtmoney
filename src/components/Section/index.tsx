@@ -1,15 +1,15 @@
-import React from 'react';
-import { 
-  ContainerSection
-} from './style';
+import React from "react";
+import { Container } from "../Container";
+import { Content } from "../Content";
+import { ContainerSection } from "./style";
 
 interface ISection {
   children?: React.ReactNode;
   fdirection?: string;
-  garea?:string;
+  garea?: string;
   jcontent?: string;
   aitems?: string;
-  bgcolor?:string;
+  bgcolor?: string;
   bbottom?: string;
   isPosition?: boolean;
   mtop?: number;
@@ -26,40 +26,42 @@ interface ISection {
   width?: number;
 }
 export const Section: React.FC<ISection> = ({
-  children, 
-  jcontent, 
-  isPosition, 
-  mtop, 
-  padding, 
-  ptb, 
-  prl, 
-  isPadding, 
-  pt, 
-  pb, 
-  pr, 
-  pl, 
+  children,
+  jcontent,
+  isPosition,
+  mtop,
+  padding,
+  ptb,
+  prl,
+  isPadding,
+  pt,
+  pb,
+  pr,
+  pl,
   width,
-  isHeight, 
-  height 
+  isHeight,
+  height,
 }: ISection) => {
   return (
-    <ContainerSection 
-      isPosition={isPosition} 
-      jcontent={jcontent} 
-      padding={padding} 
-      mtop={mtop} 
-      ptb={ptb} 
-      prl={prl} 
-      isPadding={isPadding} 
-      pt={pt} 
-      pb={pb} 
-      pr={pr} 
-      pl={pl} 
+    <ContainerSection
+      isPosition={isPosition}
+      jcontent={jcontent}
+      padding={padding}
+      mtop={mtop}
+      ptb={ptb}
+      prl={prl}
+      isPadding={isPadding}
+      pt={pt}
+      pb={pb}
+      pr={pr}
+      pl={pl}
       width={width}
       isHeight={isHeight}
       height={height}
     >
-      {children}
+      <Container>
+        <Content>{children}</Content>
+      </Container>
     </ContainerSection>
   );
-}
+};

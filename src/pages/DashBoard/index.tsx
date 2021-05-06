@@ -4,10 +4,10 @@ import React, { useMemo } from "react";
 import { LayoutLateral } from "../../Layouts/LayoutLateral";
 
 import { Aside } from "../../components/Aside";
-import { Box } from "../../components/Box";
+import { Container } from "../../components/Container";
 import { Brand } from "../../components/Brand";
 import { ButtonTogle } from "../../components/ButtonToggle";
-import { Container } from "../../components/Container";
+import { BoxContainer } from "../../components/BoxContainer";
 import { Content } from "../../components/Content";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -32,32 +32,30 @@ const Dashboard: React.FC<IDashBordProps> = ({ children }) => {
       <Container garea={"S"} isbg={true} bgcolor={"#252A48"}>
         <Content>
           <Aside>
-            <Box isPadding={true}>
-              <Brand link={"/dashboard"} alt={"My Logo"}/> 
-            </Box>
-            <Box>
+            <BoxContainer isPadding={true}>
+              <Brand link={"/dashboard"} alt={"My Logo"} />
+            </BoxContainer>
+            <BoxContainer>
               <NavBarVertical />
-            </Box>
+            </BoxContainer>
           </Aside>
         </Content>
       </Container>
       <Container garea={"H"} isbg={true} bgcolor={"#252A48"}>
-          <>
-            <Header>
-              <Box aitems={"flex-start"}>
-                <ButtonTogle/>
-              </Box>
-              <Box aitems={"flex-end"}>
-                <h3>Olá, {emoji}</h3> 
-                <span>Cláudio Cardoso</span>
-              </Box>
-            </Header>
-          </>
-        </Container>
-      <Container garea={"M"} isbg={true} bgcolor={"#1B1F38"}>
         <>
-          {children}
+          <Header>
+            <BoxContainer aitems={"flex-start"}>
+              <ButtonTogle />
+            </BoxContainer>
+            <BoxContainer aitems={"flex-end"}>
+              <h3>Olá, {emoji}</h3>
+              <span>Cláudio Cardoso</span>
+            </BoxContainer>
+          </Header>
         </>
+      </Container>
+      <Container garea={"M"} isbg={true} bgcolor={"#1B1F38"}>
+        <>{children}</>
       </Container>
       <Container garea={"F"} isbg={true} bgcolor={"#252A48"}>
         <>

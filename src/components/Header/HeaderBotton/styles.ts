@@ -1,28 +1,13 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface IHeaderProps {
   fdirection?: string;
   garea?: string;
   jcontent?: string;
   aitems?: string;
-  isbg?: boolean;
-  isp?: boolean;
-  isml?: boolean;
   bgcolor?: string;
-  isColor?: boolean;
-  color?: string;
   bbottom?: string;
   width?: number;
-  isPaddingTB?: boolean;
-  isPaddingRL?: boolean;
-  isPadding?: boolean;
-  pt?: number;
-  pr?: number;
-  pb?: number;
-  pl?: number;
-  padding?: number;
-  ml?: number;
-  isPosition?: boolean;
   height?: number;
 }
 
@@ -48,20 +33,6 @@ export const HeaderContainer = styled.header<IHeaderProps>`
     font-size: 16px;
     line-height: 18px;
   }
-
-  ${(props) =>
-    props.isColor &&
-    css<IHeaderProps>`
-      color: ${(props) =>
-        props.color ? props.color : props.theme.colors.white};
-    `}
-
-  ${(props) =>
-    props.isbg &&
-    css<IHeaderProps>`
-      background-color: ${(props) =>
-        props.bgcolor ? props.bgcolor : props.theme.colors.blue};
-    `}
 `;
 /*
 export const Content = styled.div`

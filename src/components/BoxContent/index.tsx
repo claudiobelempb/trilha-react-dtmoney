@@ -1,13 +1,13 @@
 import React from "react";
-import { BoxContainer } from "./style";
+import { BoxContentContainer } from "./style";
 
-interface IBoxProps {
+interface IBoxContentProps {
   children?: React.ReactNode;
   fdirection?: string;
-  garea?:string;
+  garea?: string;
   jcontent?: string;
   aitems?: string;
-  bgcolor?:string;
+  bgcolor?: string;
   color?: string;
   isColor?: boolean;
   isbg?: boolean;
@@ -25,17 +25,17 @@ interface IBoxProps {
   pl?: number;
 }
 
-const Box: React.FC<IBoxProps> = ({
-  children, 
-  fdirection, 
-  jcontent, 
-  aitems, 
-  isbg, 
-  bgcolor, 
+const BoxContent: React.FC<IBoxContentProps> = ({
+  children,
+  fdirection,
+  jcontent,
+  aitems,
+  isbg,
+  bgcolor,
   isColor,
   color,
-  isml, 
-  isp, 
+  isml,
+  isp,
   isPosition,
   isPaddingTB,
   isPaddingRL,
@@ -43,19 +43,19 @@ const Box: React.FC<IBoxProps> = ({
   pt,
   pb,
   pr,
-  pl
-  
-}: IBoxProps) => {
+  pl,
+}: IBoxContentProps) => {
   return (
-    <BoxContainer 
-      isPosition={isPosition}  
-      isp={isp} isml={isml} 
-      isbg={isbg} 
-      bgcolor={bgcolor} 
+    <BoxContentContainer
+      isPosition={isPosition}
+      isp={isp}
+      isml={isml}
+      isbg={isbg}
+      bgcolor={bgcolor}
       isColor={isColor}
       color={color}
-      fdirection={fdirection} 
-      jcontent={jcontent} 
+      fdirection={fdirection}
+      jcontent={jcontent}
       aitems={aitems}
       isPaddingTB={isPaddingTB}
       isPaddingRL={isPaddingRL}
@@ -66,8 +66,8 @@ const Box: React.FC<IBoxProps> = ({
       pl={pl}
     >
       {children}
-    </BoxContainer>
-  )
-}
+    </BoxContentContainer>
+  );
+};
 
-export { Box };
+export { BoxContent };

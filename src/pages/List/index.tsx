@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { v4 as uuid} from "uuid";
 
 import { LayoutLateral } from "../../Layouts/LayoutLateral";
-import { Box } from "../../components/Box";
+import { BoxContainer } from "../../components/BoxContainer";
 import { Button } from "../../components/Button";
 import { CardList } from "../../components/CardList";
 import { InputSelect } from "../../components/InputSelect";
@@ -143,31 +143,53 @@ const List: React.FC<IListProps> = ({ match }) => {
   return (
     <LayoutLateral>
       <Section>
-        <Box aitems={"flex-start"}>
-          <Title title={title} isBgcolor={isBgcolor}/>
-        </Box>
-        <Box fdirection={"row"} jcontent={"flex-end"}>
-          <InputSelect onChange={(e) => setMonthSelected(e.target.value)} options={months} defaultValue={monthSelected}/>
-          <InputSelect onChange={(e) => setYearSelected(e.target.value)} options={years} defaultValue={yearSelected}/>
-        </Box>
+        <BoxContainer aitems={"flex-start"}>
+          <Title title={title} isBgcolor={isBgcolor} />
+        </BoxContainer>
+        <BoxContainer fdirection={"row"} jcontent={"flex-end"}>
+          <InputSelect
+            onChange={(e) => setMonthSelected(e.target.value)}
+            options={months}
+            defaultValue={monthSelected}
+          />
+          <InputSelect
+            onChange={(e) => setYearSelected(e.target.value)}
+            options={years}
+            defaultValue={yearSelected}
+          />
+        </BoxContainer>
       </Section>
       <Section>
-        
-        <Box fdirection={"row"}>
-          
-          <Button  onClick={() => handleFrequencyClick('recorrente')} title={"Recorrentes"}  tgColor={"#4E41F0"} opacity={selectdRec}/>
+        <BoxContainer fdirection={"row"}>
+          <Button
+            onClick={() => handleFrequencyClick("recorrente")}
+            title={"Recorrentes"}
+            tgColor={"#4E41F0"}
+            opacity={selectdRec}
+          />
 
-          <Button onClick={() => handleFrequencyClick('eventuais')} title={"Eventuais"} tgColor={"#E44C4E"} opacity={selectdEnv}/>
-        </Box>
+          <Button
+            onClick={() => handleFrequencyClick("eventuais")}
+            title={"Eventuais"}
+            tgColor={"#E44C4E"}
+            opacity={selectdEnv}
+          />
+        </BoxContainer>
       </Section>
       <Section>
-        <Box>
-          { 
-            data.map((data) => {
-              return <CardList key={data.id} tagcolor={data.color} title={data.description} subtitle={data.date} amount={data.amount}/>
-            })
-          }
-        </Box>
+        <BoxContainer>
+          {data.map((data) => {
+            return (
+              <CardList
+                key={data.id}
+                tagcolor={data.color}
+                title={data.description}
+                subtitle={data.date}
+                amount={data.amount}
+              />
+            );
+          })}
+        </BoxContainer>
       </Section>
     </LayoutLateral>
   );

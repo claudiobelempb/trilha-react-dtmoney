@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -6,7 +6,11 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  }
+
+  body {
+    background: ${(props) => props.theme.colors.light};
+    -webkit-font-smoothing: antialiased;
   }
   
   button {
@@ -15,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     &:hover {
       filter: brightness(0.9);
     }
+
   }
 
   [disabled] {
@@ -25,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     border: 0;
     outline: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
   }
 
@@ -35,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
 
   html, body, #root {
 		height:100%;
-    background: ${props => props.theme.colors.light}
+    background: ${(props) => props.theme.colors.light}
 	}
 
   html {
@@ -48,9 +53,8 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  body {
-    background: ${props => props.theme.colors.light};
-    -webkit-font-smoothing: antialiased;
+  .font-zero {
+    font-size: 0;
   }
 
 `;
