@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createServer } from "miragejs"
+import { createServer } from "miragejs";
 
 import { App } from "./App";
 
@@ -17,11 +17,11 @@ createServer({
           type: "deposit",
           category: "Food",
           createdAt: new Date(),
-        }
+        },
       ];
     });
-  }
-})
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

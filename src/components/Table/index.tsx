@@ -1,5 +1,5 @@
-import React from 'react';
-import { TableContainer } from './style';
+import React from "react";
+import { TableContainer } from "./style";
 
 interface ITableProps {
   title?: string;
@@ -13,7 +13,7 @@ export const Table: React.FC<ITableProps> = ({
   title,
   subtitle,
   tagcolor,
-  amount
+  amount,
 }: ITableProps) => {
   return (
     <>
@@ -39,39 +39,6 @@ export const Table: React.FC<ITableProps> = ({
               <a href={"/"}>Delete</a>
             </td>
           </tr>
-          <tr>
-            <td>Hambúrguer</td>
-            <td className={"withdraw"}>- R$ 59,00</td>
-            <td>Alimentação</td>
-            <td>10/04/2021</td>
-            <td>
-              <a href={"/"}>Create</a>
-              <a href={"/"}>Update</a>
-              <a href={"/"}>Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Aluguel do apartamento</td>
-            <td className={"withdraw"}>- R$ 1.200,00</td>
-            <td>Casa</td>
-            <td>27/03/2021</td>
-            <td>
-              <a href={"/"}>Create</a>
-              <a href={"/"}>Update</a>
-              <a href={"/"}>Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Computador</td>
-            <td className={"deposit"}>R$ 5.400,00</td>
-            <td>Venda</td>
-            <td>15/03/2021</td>
-            <td>
-              <a href={"/"}>Create</a>
-              <a href={"/"}>Update</a>
-              <a href={"/"}>Delete</a>
-            </td>
-          </tr>
         </tbody>
         {/* <tfoot>
         <tr>
@@ -85,4 +52,4 @@ export const Table: React.FC<ITableProps> = ({
       </TableContainer>
     </>
   );
-}
+};

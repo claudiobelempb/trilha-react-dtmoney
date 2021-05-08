@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
 
-import { InputContainer, LabelContainer } from './style';
+import { InputContainer } from './style';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

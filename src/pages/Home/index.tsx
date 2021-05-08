@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { LayoutSantoGraal } from "../../Layouts/LayoutSantoGraal";
 import { BoxContainer } from "../../components/BoxContainer";
@@ -16,6 +16,10 @@ import { Brand } from "../../components/Brand";
 import { Button } from "../../components/Button";
 
 import { api } from "../../services/api";
+import { Form } from "../../components/Form";
+import { Input } from "../../components/Input";
+import { ModalDefault } from "../../components/ModalDefault";
+import { InputCheckBox } from "../../components/InputCheckBox";
 
 interface IHomeProps {
   children?: React.ReactNode;
@@ -29,12 +33,22 @@ const Home: React.FC<IHomeProps> = ({
   maxcolumn,
   mincolumn,
 }) => {
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(
+    false
+  );
+
+  function handleOpenNewTransactionModal() {
+    setIsNewTransactionModalOpen(true);
+  }
+
+  function handleCloseNewTransactionModal() {
+    setIsNewTransactionModalOpen(false);
+  }
 
   useEffect(() => {
-    api.get("transactions")
-    .then(response => console.log(response.data));
+    api.get("transactions").then((response) => console.log(response.data));
   }, []);
-  
+
   return (
     <LayoutSantoGraal>
       <Header garea={"H"} isbg={true}>
@@ -43,7 +57,12 @@ const Home: React.FC<IHomeProps> = ({
             <Brand link={"/"} alt={"My Logo"} />
           </BoxContent>
           <BoxContent aitems={"flex-end"} isp={true}>
-            <Button title={"Nova transação"} />
+            <Button
+              bgColor={"#33CC95"}
+              color={"#FFF"}
+              title={"Nova transação"}
+              onClick={handleOpenNewTransactionModal}
+            />
           </BoxContent>
         </BoxContainer>
       </Header>
@@ -102,6 +121,54 @@ const Home: React.FC<IHomeProps> = ({
             <Table />
           </BoxContainer>
         </Section>
+
+        <ModalDefault
+          isOpen={isNewTransactionModalOpen}
+          onRequestClose={handleCloseNewTransactionModal}
+        >
+          <Form title={"Cadastrar Transação"} action="/">
+            <BoxContainer>
+              <BoxContent>
+                <Input type={"text"} placeholder={"titulo"} />
+                <Input type={"number"} placeholder={"Valor"} />
+              </BoxContent>
+            </BoxContainer>
+            <BoxContainer>
+              <BoxContent>
+                <Button
+                  title={"Entrada: "}
+                  name={"entrada"}
+                  id={"income"}
+                  isImg={true}
+                  src={income}
+                  alt={"Entrada"}
+                />
+              </BoxContent>
+              <BoxContent>
+                <Button
+                  title={"Saída: "}
+                  name={"saida"}
+                  id={"outcome"}
+                  isImg={true}
+                  src={outcome}
+                  alt={"Saída"}
+                />
+              </BoxContent>
+            </BoxContainer>
+            <BoxContainer>
+              <Input type={"text"} placeholder={"Categoria"} />
+            </BoxContainer>
+            <BoxContainer>
+              <Button
+                type={"submit"}
+                isBgColor={true}
+                bgColor={"#33CC95"}
+                color={"#FFF"}
+                title={"Cadastrar"}
+              />
+            </BoxContainer>
+          </Form>
+        </ModalDefault>
       </Main>
       <Footer garea={"F"}>
         <h1>FOOTER</h1>

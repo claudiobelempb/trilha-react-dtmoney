@@ -17,4 +17,12 @@ export const ContainerSantoGraal = styled.div`
       border: 1px solid red;
     }
   }
+
+  @media screen and (max-width: 560px) {
+    & {
+      border: 1px solid red;
+      width: 100%;
+      
+    }
+  }
 `;

@@ -1,30 +1,115 @@
 import styled, { css } from "styled-components";
 
-interface IInputProps {
+interface IInputCheckBoxProps {
   isHover?: boolean;
+  isBefore?: boolean;
+  isAfter?: boolean;
+  img?: string;
 }
 
-export const LabelContainer = styled.span<IInputProps>``;
-
-export const InputContainer = styled.div<IInputProps>`
-  /* margin-top: 30px; */
+export const InputCheckBoxContainer = styled.div<IInputCheckBoxProps>`
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 22px;
+  width: 100%;
+  /* opacity: 0;  */
 
   & label {
-  }
-
-  & label > span {
-  }
-
-  & label > input {
     width: 100%;
-    height: 40px;
-    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    position: relative;
+    ${(props) =>
+      props.isBefore &&
+      css<IInputCheckBoxProps>`
+        &::before {
+          content: "";
+          display: block;
+          background-image: url(${(props) => props.img});
+          background-repeat: no-repeat;
+          background-position: center center;
+          /* position: absolute; */
+          height: 2rem;
+        }
+      `}
+
+    & span {
+      min-width: 10rem;
+    }
+
+    ${(props) =>
+      props.isAfter &&
+      css<IInputCheckBoxProps>`
+        &::after {
+          content: "";
+          display: block;
+          background-image: url(${(props) => props.img});
+          background-repeat: no-repeat;
+          /* background-position: center center; */
+          height: 2rem;
+          width: 2rem;
+          position: absolute;
+          top: 9px;
+          right: 110px;
+        }
+      `}
   }
 
-  padding: 10px 0;
-  width: 100%;
-  float: left;
-  position: relative;
+  & input {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    opacity: 0;
+    &[type="checkbox"],
+    &[type="radio"] {
+      padding-right: 1rem;
+      padding-left: 0.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      /* border: 1px #ccc solid;  */
+      border: 3px solid transparent;
+      /* width: 100%; */
+      background-color: ${(props) => props.theme.colors.gray_light};
+      color: ${(props) => props.theme.colors.dark};
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+      font-size: 1em;
+      height: 2rem;
+      width: 2rem;
+      margin-left: 1rem;
+
+      ${(props) =>
+        props.isHover &&
+        css<IInputCheckBoxProps>`
+          &:hover {
+            box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3) !important;
+            -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
+          }
+        `};
+    }
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
 
   &--padding {
     padding: 0.5em 5em 0.5em 2.5em !important;
@@ -62,10 +147,7 @@ export const InputContainer = styled.div<IInputProps>`
     }
   }
 
-  & [type="text"],
-  [type="email"],
-  [type="password"],
-  [type="number"] {
+  [type="ckeckbox"] {
     padding-right: 1rem;
     padding-left: 0.5rem;
     padding-top: 0.5rem;
@@ -73,7 +155,7 @@ export const InputContainer = styled.div<IInputProps>`
     /* border: 1px #ccc solid;  */
     border: 3px solid transparent;
     width: 100%;
-    background-color: ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.gray_light};
     color: ${(props) => props.theme.colors.dark};
     border-radius: 30px;
     -webkit-border-radius: 30px;
@@ -83,7 +165,7 @@ export const InputContainer = styled.div<IInputProps>`
 
     ${(props) =>
       props.isHover &&
-      css<IInputProps>`
+      css<IInputCheckBoxProps>`
         &:hover {
           box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3) !important;
           -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
@@ -177,6 +259,11 @@ export const InputContainer = styled.div<IInputProps>`
         border-color: #b26a6a;
       }
     }
+  }
+
+  & input [type="checkbox"] {
+    background-color: red;
+    color: red;
   }
 
   &__check {

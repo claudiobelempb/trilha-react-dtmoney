@@ -1,6 +1,6 @@
-import 'styled-components';
+import "styled-components";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     title: string;
     colors: {
@@ -16,10 +16,11 @@ declare module 'styled-components' {
       light: string;
       black: string;
       gray: string;
+      gray_light: string;
       sucess: string;
       info: string;
       warning: string;
-      danger:string;
-    },
+      danger: string;
+    };
   }
 }
