@@ -9,6 +9,7 @@ declare module "styled-components" {
       blue_light: string;
       red: string;
       green: string;
+      green_light: string;
       white: string;
       gray: string;
       dark: string;
@@ -17,10 +18,11 @@ declare module "styled-components" {
       black: string;
       gray: string;
       gray_light: string;
-      sucess: string;
+      success: string;
       info: string;
       warning: string;
       danger: string;
+      danger_light: string;
     };
   }
 }

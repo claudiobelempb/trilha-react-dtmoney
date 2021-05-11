@@ -26,7 +26,9 @@ const Input: React.FC<IInputProps> = (props) => {
       <Label form={props.name}>
         {props.name}
       </Label>
-      <input {...props}/>
+      <input 
+        {...props}
+      />
     </InputContainer>
   );
 }

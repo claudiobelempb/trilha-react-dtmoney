@@ -7,6 +7,16 @@ interface ITableProps {
   cardcolor?: string;
   tagcolor?: string;
   amount?: string;
+
+  ths: {
+    key: string | number;
+    title: string | number;
+  }[];
+
+  tds: {
+    key: string | number;
+    value: string | number;
+  }[];
 }
 
 export const Table: React.FC<ITableProps> = ({
@@ -14,31 +24,25 @@ export const Table: React.FC<ITableProps> = ({
   subtitle,
   tagcolor,
   amount,
+  ths,
+  tds,
 }: ITableProps) => {
   return (
     <>
       <TableContainer tagcolor={tagcolor}>
         <thead>
-          <tr>
-            <th>Título</th>
-            <th>Preço</th>
-            <th>Categoria</th>
-            <th>Data</th>
-            <th>Ações</th>
-          </tr>
+          {ths.map((th) => (
+            <tr>
+              <th key={th.key}>{th.title}</th>
+            </tr>
+          ))}
         </thead>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de site</td>
-            <td className={"deposit"}>R$ 12.000,00</td>
-            <td>Venda</td>
-            <td>13/04/2021</td>
-            <td>
-              <a href={"/"}>Create</a>
-              <a href={"/"}>Update</a>
-              <a href={"/"}>Delete</a>
-            </td>
-          </tr>
+          {tds.map((th) => (
+            <tr>
+              <td key={th.key}>{th.value}</td>
+            </tr>
+          ))}
         </tbody>
         {/* <tfoot>
         <tr>

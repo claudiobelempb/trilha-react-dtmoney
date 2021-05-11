@@ -7,17 +7,7 @@ interface ITableContainerProps {
 export const TableContainer = styled.table<ITableContainerProps>`
   width: 100%;
   border-spacing: 0 0.5rem;
-  /* position: relative; */
-  /* top: 0; */
-  /* right: 0; */
-  /* border: 0; */
-  /* left: 0; */
-  overflow-x: scroll;
-  /* height: auto; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem; */
+  border-collapse: collapse;
   /* 
   padding: 1rem;
   border-collapse: collapse;

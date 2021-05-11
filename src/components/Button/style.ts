@@ -1,20 +1,25 @@
 import styled, { css } from "styled-components";
-import { darken } from "polished";
+import { darken, transparentize } from "polished";
 
 interface IButtonProps {
   isBgColor?: boolean;
-  bgColor?: string;
+  bgColor?: any;
   color?: string;
   tagColor?: string;
-  width?: string;
+  width?: number;
+  MaxWidth?: number;
+  MinWidth?: number;
   fontSize?: string;
   opacity?: number | string;
   isAfter?: boolean;
   isImg?: boolean;
+  isActive?: boolean;
 }
 
 export const ButtonContainer = styled.button<IButtonProps>`
-  width: 100%;
+  width: ${(props) => (props.width ? props.width : 100)}%;
+  max-width: ${(props) => props.MaxWidth}px;
+  min-width: ${(props) => props.MinWidth}px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,18 +28,25 @@ export const ButtonContainer = styled.button<IButtonProps>`
   padding: 0 1rem;
   height: 3rem;
   border-radius: 0.25rem;
-  background-color: ${(props) =>
-    props.bgColor ? props.bgColor : props.theme.colors.light};
+  background: ${(props) =>
+    props.bgColor ? transparentize(0.9, props.bgColor) : "transparent"};
   /* margin-top: 20px; */
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.dark_light};
   opacity: ${(props) => (props.opacity ? props.opacity : 1)};
 
   ${(props) =>
+    props.isActive &&
+    css<IButtonProps>`
+      background: ${(props) =>
+        props.isActive ? props.theme.colors.gray_light : "transparent"};
+    `};
+
+  ${(props) =>
     props.isBgColor &&
     css<IButtonProps>`
-      background-color: ${(props) =>
-        props.bgColor ? props.bgColor : props.theme.colors.blue_light};
+      background: ${(props) =>
+        props.isBgColor ? props.bgColor : "transparent"};
     `};
 
   ${(props) =>

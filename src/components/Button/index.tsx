@@ -7,13 +7,16 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isBgColor?: boolean;
   bgColor?: string;
   tgColor?: string;
-  width?: string;
+  width?: number;
+  MaxWidth?: number;
+  MinWidth?: number;
   fontSize?: string;
   opacity?: number | string;
   isAfter?: boolean;
   alt?: string;
   src?: string;
   isImg?: boolean;
+  isActive?: boolean;
 }
 
 export function Button({ children, ...props }: IButtonProps) {
@@ -25,17 +28,16 @@ export function Button({ children, ...props }: IButtonProps) {
       color={props.color}
       tagColor={props.tgColor}
       width={props.width}
+      MaxWidth={props.MaxWidth}
+      MinWidth={props.MinWidth}
       fontSize={props.fontSize}
       opacity={props.opacity}
       isAfter={props.isAfter}
       onClick={props.onClick}
       isImg={props.isImg}
+      isActive={props.isActive}
     >
-      {props.isImg ? (
-        <img src={props.src} alt={props.alt} />
-      ) : (
-        ""
-      )}
+      {props.isImg ? <img src={props.src} alt={props.alt} /> : ""}
       <span>{props.title ? props.title : "Button"}</span>
     </ButtonContainer>
   );
