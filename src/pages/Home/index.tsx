@@ -1,47 +1,39 @@
-import React, { useEffect, useState, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 
 import { LayoutSantoGraal } from "../../Layouts/LayoutSantoGraal";
 import { BoxContainer } from "../../components/BoxContainer";
 import { Section } from "../../components/Section";
-import income from "../../assets/images/income.svg";
-import outcome from "../../assets/images/outcome.svg";
-import total from "../../assets/images/total.svg";
 import { Footer } from "../../components/Footer";
-
 import { BoxContent } from "../../components/BoxContent";
 import { Main } from "../../components/Main";
 import { Header } from "../../components/Header";
 import { Brand } from "../../components/Brand";
 import { Button } from "../../components/Button";
-
-import { api } from "../../services/api";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/Input";
 import { ModalDefault } from "../../components/ModalDefault";
 import { formatDateRo, formatValueRo } from "../../utils/utils";
+import ImgIncome from "../../assets/images/income.svg";
+import ImgOutcome from "../../assets/images/outcome.svg";
+import ImgTotal from "../../assets/images/total.svg";
+
+import { useTransactions } from "../../hooks/useTransactions";
 
 interface IHomeProps {
   children?: React.ReactNode;
   garea?: string;
   maxcolumn?: number;
   mincolumn?: number;
+  onRequestClose(): Promise<void>;
 }
 
-interface ITransaction {
-  id: number;
-  title: string;
-  type: string;
-  category: string;
-  amount: number;
-  createAt: string;
-}
-
-const Home: React.FC<IHomeProps> = () => {
+const Home: React.FC<IHomeProps> = ({ children, onRequestClose }) => {
+  const { transactions, createTransaction } = useTransactions();
+  console.log(transactions);
   const [title, setTitle] = useState("");
-  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
-  const [typeBtn, setTypeBtn] = useState("deposit");
-  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+  const [type, setType] = useState("deposit");
 
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
     useState(false);
@@ -54,26 +46,50 @@ const Home: React.FC<IHomeProps> = () => {
     setIsNewTransactionModalOpen(false);
   }
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
-    const data = {
-      typeBtn,
-      title,
-      value,
-      category,
-    };
 
-    api.post("/transactions", data);
+    await createTransaction({
+      title,
+      amount,
+      category,
+      type,
+    });
+
+    setTitle("");
+    setAmount(0);
+    setCategory("");
+    setType("deposit");
+
+    handleCloseNewTransactionModal();
   }
 
-  useEffect(() => {
-    api
-      .get("transactions")
-      .then((response) => setTransactions(response.data.transactions));
-  }, [setTransactions]);
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "deposit") {
+        acc.deposits += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.withdraws += transaction.amount;
+        acc.total -= transaction.amount;
+      }
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      total: 0,
+    }
+  );
 
   return (
     <LayoutSantoGraal>
+      {/* <HomeContext.Consumer>
+        {(data) => {
+          console.log(data);
+          return <p></p>;
+        }}
+      </HomeContext.Consumer> */}
       <Header garea={"H"} isbg={true}>
         <BoxContainer>
           <BoxContent aitems={"flex-start"} isp={true}>
@@ -99,10 +115,10 @@ const Home: React.FC<IHomeProps> = () => {
             <BoxContent isbg={true} isPadding={true}>
               <BoxContent fdirection={"row"} jcontent={"space-between"}>
                 <h3 className={"title"}>Entrada</h3>
-                <img src={income} alt={"income"} />
+                <img src={ImgIncome} alt={"income"} />
               </BoxContent>
               <BoxContent aitems={"flex-start"}>
-                <strong>R$ 17.400,00</strong>
+                <strong>{formatValueRo(summary.deposits)}</strong>
                 <span className={"sub-title"}>
                   Última entrada dia 13 de abril
                 </span>
@@ -111,10 +127,12 @@ const Home: React.FC<IHomeProps> = () => {
             <BoxContent isbg={true} isPadding={true}>
               <BoxContent fdirection={"row"} jcontent={"space-between"}>
                 <h3 className={"title"}>Saída</h3>
-                <img src={outcome} alt={"outcome"} />
+                <img src={ImgOutcome} alt={"outcome"} />
               </BoxContent>
               <BoxContent aitems={"flex-start"}>
-                <strong>R$ 17.400,00</strong>
+                <strong className={"withdraw"}>
+                  -{formatValueRo(summary.withdraws)}
+                </strong>
                 <span className={"sub-title"}>
                   Última entrada dia 13 de abril
                 </span>
@@ -127,11 +145,11 @@ const Home: React.FC<IHomeProps> = () => {
               isPadding={true}
             >
               <BoxContent fdirection={"row"} jcontent={"space-between"}>
-                <h3 className={"title"}>Entrada</h3>
-                <img src={total} alt={"total"} />
+                <h3 className={"title"}>Total</h3>
+                <img src={ImgTotal} alt={"total"} />
               </BoxContent>
               <BoxContent aitems={"flex-start"}>
-                <strong>R$ 17.400,00</strong>
+                <strong>{formatValueRo(summary.total)}</strong>
                 <span className={"sub-title"}>
                   Última entrada dia 13 de abril
                 </span>
@@ -157,8 +175,16 @@ const Home: React.FC<IHomeProps> = () => {
                   return (
                     <tr key={transaction.id}>
                       <td>{transaction.title}</td>
-                      <td className={transaction.type === "deposit" ? "deposit" : "withdraw"}>
-                        {formatValueRo(transaction.amount)}
+                      <td
+                        className={
+                          transaction.type === "deposit"
+                            ? "deposit"
+                            : "withdraw"
+                        }
+                      >
+                        {transaction.type === "deposit"
+                          ? formatValueRo(transaction.amount)
+                          : `-${formatValueRo(transaction.amount)}`}
                       </td>
                       <td>{transaction.category}</td>
                       <td>{formatDateRo(transaction.createAt)}</td>
@@ -189,8 +215,8 @@ const Home: React.FC<IHomeProps> = () => {
                 <Input
                   type={"number"}
                   placeholder={"Valor"}
-                  value={value}
-                  onChange={(event) => setValue(Number(event.target.value))}
+                  value={amount}
+                  onChange={(event) => setAmount(Number(event.target.value))}
                 />
               </BoxContent>
             </BoxContainer>
@@ -202,12 +228,12 @@ const Home: React.FC<IHomeProps> = () => {
                   name={"entrada"}
                   id={"income"}
                   isImg={true}
-                  src={income}
+                  src={ImgIncome}
                   alt={"Entrada"}
                   onClick={() => {
-                    setTypeBtn("deposit");
+                    setType("deposit");
                   }}
-                  isActive={typeBtn === "deposit"}
+                  isActive={type === "deposit"}
                   isBgColor={false}
                   bgColor={"#33CC95"}
                 />
@@ -220,12 +246,12 @@ const Home: React.FC<IHomeProps> = () => {
                   name={"saida"}
                   id={"outcome"}
                   isImg={true}
-                  src={outcome}
+                  src={ImgOutcome}
                   alt={"Saída"}
                   onClick={() => {
-                    setTypeBtn("withdraw");
+                    setType("withdraw");
                   }}
-                  isActive={typeBtn === "withdraw"}
+                  isActive={type === "withdraw"}
                   isBgColor={false}
                   bgColor={"#E52E4D"}
                 />
